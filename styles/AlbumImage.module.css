@@ -1,0 +1,40 @@
+.albumImage {
+  border-radius: var(--custom-border-radius);
+  overflow: hidden;
+  max-width: 100%;
+}
+.albumImage.image {
+  object-fit: cover;
+}
+.albumImage.noImage {
+  background-color: #333;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 5px;
+}
+.uploadInput {
+  visibility: "hidden";
+  position: "absolute";
+}
+.block {
+  display: block;
+  width: 100%;
+}
+
+.button {
+  color: var(--custom-color);
+  border: var(--custom-border);
+  background-color: var(--custom-bg-color);
+  display: inline-block;
+  text-align: center;
+  border-radius: var(--custom-border-radius);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-align: center;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.button.primary {
+  background-color: var(--custom-color-brand);
+  border: 1px solid var(--custom-color-brand);
+}
