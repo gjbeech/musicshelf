@@ -32,8 +32,10 @@ export default function AlbumImage({
       if (error) {
         throw error;
       }
-      const url = URL.createObjectURL(data);
-      setAlbumImageUrl(url);
+      if (data !== null) {
+        const url = URL.createObjectURL(data);
+        setAlbumImageUrl(url);
+      }
     } catch (error) {
       console.log("Error downloading image: ", error);
     }
@@ -63,7 +65,10 @@ export default function AlbumImage({
       }
 
       const { data } = supabase.storage.from("artwork").getPublicUrl(file.name);
-      onUpload(data.publicURL, file.name);
+      // if (data !== null) {
+      //   onUpload(data.publicURL, file.name);
+      // }
+      onUpload(data?.publicURL ?? "", file.name);
     } catch (error) {
       alert("Error uploading albumImage!");
       console.log(error);

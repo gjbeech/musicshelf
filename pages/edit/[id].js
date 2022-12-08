@@ -43,7 +43,7 @@ const Edit = () => {
       .eq("id", id)
       .eq("user_id", user?.id);
 
-    alert("Album updated successfully");
+    console.dir("Album updated successfully");
 
     router.push("/");
   };
@@ -61,7 +61,7 @@ const Edit = () => {
       .eq("id", id)
       .eq("user_id", user?.id);
 
-    alert("Album Image updated successfully");
+    console.dir("Album Image updated successfully");
 
     router.push("/");
   };

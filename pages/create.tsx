@@ -15,7 +15,7 @@ const Create = () => {
 
   const { title, artist, year } = albumData;
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     setAlbumData({ ...albumData, [e.target.name]: e.target.value });
   };
 
@@ -31,7 +31,7 @@ const Create = () => {
         user_id: user?.id,
       })
       .single();
-    alert("Album created successfully");
+    console.dir("Album created successfully");
     setAlbumData(initialState);
     router.push("/");
   };

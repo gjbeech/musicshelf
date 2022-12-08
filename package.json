@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-auth-helpers": "^1.4.2",
     "@supabase/supabase-js": "^1.35.4",
     "@types/node": "^18.11.11",
     "@types/react": "^18.0.26",

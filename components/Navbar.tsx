@@ -1,9 +1,11 @@
 import Link from "next/link";
 import styles from "../styles/Navbar.module.css";
 import { supabase } from "../utils/supabase";
+//import { Session } from "@supabase/supabase-auth-helpers";
 import React from "react";
+import { Session } from "@supabase/supabase-js";
 
-const Navbar = ({ session }) => {
+const Navbar = ({ session }: { session: Session }) => {
   return (
     <div className={styles.container}>
       <div>

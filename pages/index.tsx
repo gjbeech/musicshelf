@@ -5,9 +5,13 @@ import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 import { supabase } from "../utils/supabase";
 import AlbumCard from "../components/AlbumCard";
+import { Session } from "@supabase/supabase-js";
+import { Database } from "../utils/database.types";
+//import { AlbumCardProps } from "../utils/types";
+type Albums = Database["public"]["Tables"]["albums"]["Row"];
 
-export default function Home({ session }) {
-  const [data, setData] = useState([]);
+export default function Home({ session }: { session: Session }) {
+  const [data, setData] = useState<Albums[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,7 +30,7 @@ export default function Home({ session }) {
       if (error) throw error;
       setData(data);
     } catch (error) {
-      alert(error.message);
+      //alert(error.message);
     } finally {
       setLoading(false);
     }
@@ -36,7 +40,7 @@ export default function Home({ session }) {
     return <div className={styles.loading}>Fetching Albums...</div>;
   }
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: any) => {
     try {
       const user = supabase.auth.user();
       const { data, error } = await supabase
@@ -48,7 +52,7 @@ export default function Home({ session }) {
       if (error) throw error;
       alert("Album deleted successfully");
     } catch (error) {
-      alert(error.message);
+      //alert(error.message);
     }
   };
   return (

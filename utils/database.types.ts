@@ -45,6 +45,10 @@ export interface Database {
           inserted_at: string | null;
           image_url: string | null;
           image_name: string | null;
+          cover_url: string | null;
+          cover_filename: string | null;
+          back_url: string | null;
+          back_filename: string | null;
         };
         Insert: {
           id: string;
@@ -55,6 +59,10 @@ export interface Database {
           inserted_at?: string | null;
           image_url?: string | null;
           image_name?: string | null;
+          cover_url?: string | null;
+          cover_filename?: string | null;
+          back_url?: string | null;
+          back_filename?: string | null;
         };
         Update: {
           id?: string;
@@ -65,6 +73,10 @@ export interface Database {
           inserted_at?: string | null;
           image_url?: string | null;
           image_name?: string | null;
+          cover_url?: string | null;
+          cover_filename?: string | null;
+          back_url?: string | null;
+          back_filename?: string | null;
         };
       };
     };
