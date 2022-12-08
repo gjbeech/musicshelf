@@ -55,6 +55,43 @@ export default function Home({ session }: { session: Session }) {
       //alert(error.message);
     }
   };
+  const handleSwap = async (id: any) => {
+    try {
+      const album = document.getElementsByClassName(
+        `${id}`
+      )[0] as HTMLElement | null;
+      if (album) {
+        //const f = document.querySelectorAll<HTMLElement>(`${id} "front"`) as HTMLElement | null;
+        //const b = document.querySelectorAll<HTMLElement>(`${id} ${"back"}`) as HTMLElement | null;
+        var front = album.getElementsByClassName(
+          `${"front"}`
+        )[0] as HTMLElement | null;
+        var back = album.getElementsByClassName(
+          `${"back"}`
+        )[0] as HTMLElement | null;
+        if (back !== null) {
+          if (window.getComputedStyle(back).display === "none") {
+            if (front !== null) {
+              //album.getElementsByClassName(`${"back"}`)[0].style.display = "none";
+              front.style.display = "none";
+              back.style.display = "block";
+              console.dir("showing back..");
+            }
+          } else {
+            if (front !== null) {
+              //album.getElementsByClassName(`${"back"}`)[0].style.display = "none";
+              front.style.display = "block";
+              back.style.display = "none";
+              console.dir("showing front..");
+            }
+          }
+        }
+      }
+    } catch (error) {
+      //alert(error.message);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -87,7 +124,11 @@ export default function Home({ session }: { session: Session }) {
             ) : (
               <div>
                 <p className={styles.albumHeading}>Here are your albums</p>
-                <AlbumCard data={data} handleDelete={handleDelete} />
+                <AlbumCard
+                  data={data}
+                  handleDelete={handleDelete}
+                  handleSwap={handleSwap}
+                />
               </div>
             )}
           </div>

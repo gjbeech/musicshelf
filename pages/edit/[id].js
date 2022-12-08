@@ -48,20 +48,37 @@ const Edit = () => {
     router.push("/");
   };
 
-  const updateAlbumImage = async (image_url, image_name) => {
+  const updateAlbumCover = async (cover_url, cover_filename) => {
     const user = supabase.auth.user();
-    console.dir(image_url);
+    console.dir("front " + cover_url);
 
     const { data } = await supabase
       .from("albums")
       .update({
-        image_url,
-        image_name,
+        cover_url,
+        cover_filename,
       })
       .eq("id", id)
       .eq("user_id", user?.id);
 
-    console.dir("Album Image updated successfully");
+    console.dir("Album cover updated successfully");
+
+    router.push("/");
+  };
+  const updateAlbumBack = async (back_url, back_filename) => {
+    const user = supabase.auth.user();
+    console.dir("back " + back_url);
+
+    const { data } = await supabase
+      .from("albums")
+      .update({
+        back_url,
+        back_filename,
+      })
+      .eq("id", id)
+      .eq("user_id", user?.id);
+
+    console.dir("Album back updated successfully");
 
     router.push("/");
   };
@@ -97,14 +114,25 @@ const Edit = () => {
 
         <label className={styles.label}> Image:</label>
         {/* {album?.image_url} */}
-        <AlbumImage
-          url={album?.image_name}
-          onUpload={updateAlbumImage}
-          size="100"
-        />
-
+        <div className={styles.images}>
+          <AlbumImage
+            type="cover"
+            url={album?.cover_filename}
+            onUpload={updateAlbumCover}
+            size="100"
+          />
+          <AlbumImage
+            type="back"
+            url={album?.back_filename}
+            onUpload={updateAlbumBack}
+            size="100"
+          />
+        </div>
         <button onClick={updateAlbum} className={styles.updateButton}>
           Update Album
+        </button>
+        <button nClick={() => Router.back()} className={styles.updateButton}>
+          Back
         </button>
       </div>
     </div>

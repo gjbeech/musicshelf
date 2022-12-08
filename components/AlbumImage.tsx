@@ -8,18 +8,24 @@ type Albums = Database["public"]["Tables"]["albums"]["Row"];
 
 export default function AlbumImage({
   url,
+  // type,
   size,
   onUpload,
 }: {
-  url: Albums["image_name"];
+  url: string | null;
+  //type: string;
   size: number;
   onUpload: (url: string, fileName: string) => void;
 }) {
   const [albumImageUrl, setAlbumImageUrl] =
-    useState<Albums["image_name"]>(null);
+    useState<Albums["cover_filename"]>(null);
+  //const [backImageUrl, setAlbumBackImageUrl] =
+  // useState<Albums["back_filename"]>(null);
   const [uploading, setUploading] = useState(false);
   console.log(url);
   console.log(albumImageUrl);
+  //console.log(backImageUrl);
+
   useEffect(() => {
     if (url) downloadImage(url);
   }, [url]);
@@ -34,7 +40,11 @@ export default function AlbumImage({
       }
       if (data !== null) {
         const url = URL.createObjectURL(data);
+        // if (type == "cover") {
         setAlbumImageUrl(url);
+        //} else {
+        //  setAlbumBackImageUrl(url);
+        //}
       }
     } catch (error) {
       console.log("Error downloading image: ", error);
