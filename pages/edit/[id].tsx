@@ -132,12 +132,12 @@ const Edit = () => {
           <AlbumImage
             url={albumData?.cover_filename}
             onUpload={updateAlbumCover}
-            size="100"
+            size="160"
           />
           <AlbumImage
             url={albumData?.back_filename}
             onUpload={updateAlbumBack}
-            size="100"
+            size="160"
           />
         </div>
         <button onClick={updateAlbum} className={styles.updateButton}>
