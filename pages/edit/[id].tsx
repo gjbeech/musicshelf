@@ -74,7 +74,7 @@ const Edit = () => {
 
     console.dir("Album cover updated successfully");
 
-    router.push("/");
+    //router.push("/");
   };
   const updateAlbumBack = async (back_url: string, back_filename: string) => {
     const user = supabase.auth.user();
@@ -91,7 +91,7 @@ const Edit = () => {
 
     console.dir("Album back updated successfully");
 
-    router.push("/");
+    //router.push("/");
   };
 
   return (
