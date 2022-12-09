@@ -9,6 +9,7 @@ import { FiEdit } from "react-icons/fi";
 import { formatDistanceToNow } from "date-fns";
 import { Database } from "../utils/database.types";
 import { useState } from "react";
+import AlbumCovers from "./AlbumCovers";
 type Albums = Database["public"]["Tables"]["albums"]["Row"];
 
 const AlbumCard = ({
@@ -21,14 +22,18 @@ const AlbumCard = ({
   handleSwap: (id: string) => void;
 }) => {
   const [showFront, setShowFront] = useState(true);
-  console.log(data);
+  //console.log(data);
   //ar imageUrl = data.item.image_url ?? "/public/No-album-art.png";
   return (
     <div className={styles.albumContainer}>
       {data?.map((item) => (
         <div key={item.id} className={`${styles.container} ${item.id}`}>
           <div className={styles.cover}>
-            {showFront ? (
+            <AlbumCovers
+              cover_url={item.cover_url ?? ""}
+              back_url={item.back_url ?? ""}
+            />
+            {/* {showFront ? (
               <Image
                 src={item.cover_url ?? "/No-album-art.png"}
                 alt="cover art"
@@ -46,7 +51,7 @@ const AlbumCard = ({
                 objectFit="cover"
                 onClick={() => setShowFront(true)}
               />
-            )}
+            )} */}
           </div>
           <p className={styles.title}>
             {" "}
