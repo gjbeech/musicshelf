@@ -5,7 +5,15 @@ import { supabase } from "../../utils/supabase";
 import AlbumImage from "../../components/AlbumImage";
 
 const Edit = () => {
-  const [album, setAlbum] = useState(null);
+  const initialState = {
+    title: "",
+    artist: "",
+    year: "",
+    cover_filename: "",
+    back_filename: "",
+  };
+  const [albumData, setAlbum] = useState(initialState);
+  const { title, artist, year } = albumData;
   const router = useRouter();
 
   const { id } = router.query;
@@ -23,15 +31,15 @@ const Edit = () => {
     getAlbum();
   }, [id]);
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: { target: { name: any; value: any } }) => {
     setAlbum({
-      ...album,
+      ...albumData,
       [e.target.name]: e.target.value,
     });
   };
 
   const updateAlbum = async () => {
-    const { title, artist, year } = album;
+    const { title, artist, year } = albumData;
     const user = supabase.auth.user();
     const { data } = await supabase
       .from("albums")
@@ -48,7 +56,10 @@ const Edit = () => {
     router.push("/");
   };
 
-  const updateAlbumCover = async (cover_url, cover_filename) => {
+  const updateAlbumCover = async (
+    cover_url: string,
+    cover_filename: string
+  ) => {
     const user = supabase.auth.user();
     console.dir("front " + cover_url);
 
@@ -65,7 +76,7 @@ const Edit = () => {
 
     router.push("/");
   };
-  const updateAlbumBack = async (back_url, back_filename) => {
+  const updateAlbumBack = async (back_url: string, back_filename: string) => {
     const user = supabase.auth.user();
     console.dir("back " + back_url);
 
@@ -89,25 +100,28 @@ const Edit = () => {
         <h1 className={styles.title}>Edit Album</h1>
         <label className={styles.label}> Title:</label>
         <input
+          title="title"
           type="text"
           name="title"
-          value={album?.title}
+          value={albumData?.title}
           onChange={handleOnChange}
           className={styles.updateInput}
         />
         <label className={styles.label}> Artist:</label>
         <input
+          title="artist"
           type="text"
           name="artist"
-          value={album?.artist}
+          value={albumData?.artist}
           onChange={handleOnChange}
           className={styles.updateInput}
         />
         <label className={styles.label}> Year:</label>
         <input
+          title="year"
           type="text"
           name="year"
-          value={album?.year}
+          value={albumData?.year}
           onChange={handleOnChange}
           className={styles.updateInput}
         />
@@ -116,14 +130,12 @@ const Edit = () => {
         {/* {album?.image_url} */}
         <div className={styles.images}>
           <AlbumImage
-            type="cover"
-            url={album?.cover_filename}
+            url={albumData?.cover_filename}
             onUpload={updateAlbumCover}
             size="100"
           />
           <AlbumImage
-            type="back"
-            url={album?.back_filename}
+            url={albumData?.back_filename}
             onUpload={updateAlbumBack}
             size="100"
           />
@@ -131,7 +143,7 @@ const Edit = () => {
         <button onClick={updateAlbum} className={styles.updateButton}>
           Update Album
         </button>
-        <button nClick={() => Router.back()} className={styles.updateButton}>
+        <button onClick={() => router.back()} className={styles.updateButton}>
           Back
         </button>
       </div>

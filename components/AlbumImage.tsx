@@ -13,8 +13,7 @@ export default function AlbumImage({
   onUpload,
 }: {
   url: string | null;
-  //type: string;
-  size: number;
+  size: string;
   onUpload: (url: string, fileName: string) => void;
 }) {
   const [albumImageUrl, setAlbumImageUrl] =
@@ -89,27 +88,28 @@ export default function AlbumImage({
 
   return (
     <div>
-      {albumImageUrl ? (
-        <Image
-          src={albumImageUrl}
-          alt="AlbumImage"
-          className={`${styles.albumImage} ${styles.image}`}
-          style={{ height: size + "px", width: size + "px" }}
-          width={size}
-          height={size}
-        />
-      ) : (
-        <div
-          className={`${styles.albumImage} ${styles.noImage}`}
-          style={{ height: size, width: size }}
-        />
-      )}
       <div style={{ width: size }}>
         <label
           className={`${styles.button} ${styles.primary} ${styles.block}`}
           htmlFor="single"
         >
-          {uploading ? "Uploading ..." : "Upload"}
+          {albumImageUrl ? (
+            <Image
+              src={albumImageUrl}
+              alt="AlbumImage"
+              className={`${styles.albumImage} ${styles.image}`}
+              style={{ height: size + "px", width: size + "px" }}
+              width={size}
+              height={size}
+            />
+          ) : (
+            <div
+              className={`${styles.albumImage} ${styles.noImage}`}
+              style={{ height: size, width: size }}
+            />
+          )}
+
+          {uploading ? "Uploading ..." : ""}
         </label>
         <input
           className={styles.uploadInput}
